@@ -17,18 +17,48 @@ GAME RULES:
 /// How to change CSS styles
 
 // Scores
-var scores, roundScores, activePlayer, dice;
+var scores, roundScores, activePlayer;
 
 scores = [0,0];
 roundScore = 0;
-activePlayer = 0;
+activePlayer = 1;
 
-dice = Math.floor(Math.random() * 6) + 1;
+// dice = Math.floor(Math.random() * 6) + 1;
 
-document.querySelector('#current-' + activePlayer).textContent = dice;
+// document.querySelector('#current-' + activePlayer).textContent = dice;
 // document.querySelector('#current-' + activePlayer).innerHTML = '<em>' + dice + '</em>';
-
-var x = document.querySelector('#score-0').textContent;
-console.log(x);
+// var x = document.querySelector('#score-0').textContent;
 
 document.querySelector('.dice').style.display = 'none';
+
+document.getElementById('score-0').textContent = '0';
+document.getElementById('score-1').textContent = '0';
+document.getElementById('current-0').textContent = '0';
+document.getElementById('current-1').textContent = '0';
+
+///////////////// Lecture 1
+/// How to set up an event handler
+/// What a callback function is
+/// What an anonymous function is
+/// Another way to select items by ID
+/// How to change the image in an <img> element
+
+// Callback function, function that we pass into another as an argument
+// This is an external function, or use it within the other function as an anonymous function, limiting because it only works for that one instance. Not reusable.
+// function btn() {
+//       Do something here
+// };
+// btn();
+
+document.querySelector('.btn-roll').addEventListener('click', function() {
+      // 1 - Random number
+      var dice = Math.floor(Math.random() * 6) + 1;
+
+      // 2 - Display the result
+      var diceDOM = document.querySelector('.dice')
+      diceDOM.style.display = 'block';
+      diceDOM.src = 'dice-' + dice + '.png';
+
+      // 3 - Update the round score IF the rolled number was NOT a 1
+
+});
