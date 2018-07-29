@@ -65,24 +65,50 @@ document.querySelector('.btn-roll').addEventListener('click', function() {
             roundScore += dice;
             document.querySelector('#current-' + activePlayer).textContent = roundScore;
       } else {
-            // Move to next player
-            // Ternary operator, easier to write than if/else
-            activePlayer === 0 ? activePlayer = 1 : activePlayer = 0;
-            roundScore = 0;
-
-            document.getElementById('current-0').textContent = '0';
-            document.getElementById('current-1').textContent = '0';
-
-            document.querySelector('.player-0-panel').classList.toggle('active');
-            document.querySelector('.player-1-panel').classList.toggle('active');
-
-            // document.querySelector('.player-0-panel').classList.remove('active');
-            // document.querySelector('.player-1-panel').classList.add('active');
-
-            document.querySelector('.dice').style.display = 'none';
+            nextPlayer();
       }
 });
 
-///////////////// Lecture 1
+document.querySelector('.btn-hold').addEventListener('click', function() {
+      // Add CURRENT score to GLOBAL score
+      scores[activePlayer] += roundScore;
+      // Update UI (User Interface)
+      document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer];
+      // Check if player won the game
+      if (scores[activePlayer] >= 20) {
+            document.querySelector('#name-' + activePlayer).textContent = 'Winner!';
+            document.querySelector('.dice').style.display = 'none';
+            document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');
+            document.querySelector('.player-' + activePlayer + '-panel').classList.remove('active');
+      } else {
+            nextPlayer();
+      }
+      // Move to next player
+});
+
+function nextPlayer () {
+      // Move to next player
+      // Ternary operator, easier to write than if/else
+      activePlayer === 0 ? activePlayer = 1 : activePlayer = 0;
+      roundScore = 0;
+
+      document.getElementById('current-0').textContent = '0';
+      document.getElementById('current-1').textContent = '0';
+
+      document.querySelector('.player-0-panel').classList.toggle('active');
+      document.querySelector('.player-1-panel').classList.toggle('active');
+
+      // document.querySelector('.player-0-panel').classList.remove('active');
+      // document.querySelector('.player-1-panel').classList.add('active');
+
+      document.querySelector('.dice').style.display = 'none';
+}
+
+///////////////// Lecture 3
 /// What the ternary operator is
 /// How to add, remove and toggle HTML classes
+
+
+///////////////// Lecture 4
+/// How to use functions to correctly apply the DRY principle
+/// How to think about the game logic like a programmer
