@@ -8,7 +8,8 @@ GAME RULES:
 - The first player to reach 100 points on GLOBAL score wins the game
 
 CHALLENGES:
-
+- Player loses ENTIRE score if rolls 6 twice in a row, then it's the next player's turn
+- Add an input field to the HTML where players can set the winning score so that they can change the predefined score of 100.
 
 */
 
@@ -72,7 +73,20 @@ document.querySelector('.btn-hold').addEventListener('click', function() {
             // Update UI (User Interface)
             document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer];
             // Check if player won the game
-            if (scores[activePlayer] >= 100) {
+
+            var input = document.querySelector('.final-score').value;
+            var winningScore;
+
+            // Undefined, 0, null or "" are COERCED to false
+            // Anything else is COERCED to true
+
+            if (input) {
+                  winningScore = input;
+            } else {
+                  winningScore = 100;
+            }
+
+            if (scores[activePlayer] >= winningScore) {
                   document.querySelector('#name-' + activePlayer).textContent = 'Winner!';
                   document.querySelector('.dice').style.display = 'none';
                   document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');
